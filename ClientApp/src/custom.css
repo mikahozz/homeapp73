@@ -1,0 +1,30 @@
+body { 
+  background-color:  rgb(27, 26, 38); 
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  font-size: 0.8em;
+  color: white;
+  font-family: Ubuntu;
+}
+h2 { font-size: 1.4em; margin-bottom: 0;}
+h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
+
+.header {
+  line-height: 2em;
+}
+.box {
+  background-color: rgb(39,41,62); 
+  padding: 5% 5% 5% 5%;
+  margin: 5% auto 5% auto;
+  border-radius: 5px;
+}
+
+.forecastTable { width: 100%;  }
+.forecastTable td {
+  padding: 1% 2% 1% 1%;
+}
+.forecastTable .timeCol { padding-right: 10%; color: rgb(151,151,151); }
+
+.recharts-text { color: rgb(151,151,151); }
+
+.temperatureNow { font-size: 4em;}
