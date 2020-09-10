@@ -12,17 +12,20 @@ export class Forecast extends Component {
   componentDidMount() {
     this.populateForecastData();
   }
-
+static renderRotate(degree) {
+  return ({transform: 'rotate(' + degree + 'deg)'});
+}
   static renderWeatherContents(forecastdata) {
+    let style = {transform: 'rotate(180deg)'};
     return (
       <div>
         <table className="forecastTable">
           <tbody>
             {forecastdata.map(forecastitem =>
-              <tr key={forecastitem.datetime}>
-                <td className="timeCol">{moment(forecastitem.datetime).format('HH:mm')}</td>
-                <td>{forecastitem.temperature}°</td>
-                <td>{forecastitem.humidity}%</td>
+              <tr key={forecastitem.Datetime}>
+                <td className="timeCol">{moment(forecastitem.Datetime).format('HH:mm')}</td>
+                <td><img src={"/img/" + forecastitem.WeatherSymbol3 + ".svg"} />{Math.round(forecastitem.Temperature)}°</td>
+                <td><img style={Forecast.renderRotate(forecastitem.WindDirection)} src="/img/arrow.svg" width="20px" height="20px" />{forecastitem.Humidity}%</td>
               </tr>
             )}
           </tbody>
