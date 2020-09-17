@@ -23,9 +23,10 @@ static renderRotate(degree) {
           <tbody>
             {forecastdata.map(forecastitem =>
               <tr key={forecastitem.Datetime}>
-                <td className="timeCol">{moment(forecastitem.Datetime).format('HH:mm')}</td>
-                <td><img src={"/img/" + forecastitem.WeatherSymbol3 + ".svg"} />{Math.round(forecastitem.Temperature)}°</td>
-                <td><img style={Forecast.renderRotate(forecastitem.WindDirection)} src="/img/arrow.svg" width="20px" height="20px" />{forecastitem.Humidity}%</td>
+                <td className="time-col">{moment(forecastitem.Datetime).format('HH:mm')}</td>
+                <td><img width="32" height="32" src={"/img/" + forecastitem.WeatherSymbol3 + ".svg"} /></td>
+                <td className="temperature-col">{Math.round(forecastitem.Temperature)}°</td>
+                <td><div className="wind-container"><img style={Forecast.renderRotate(forecastitem.WindDirection-180)} src="/img/arrow.svg" width="32px" height="32px" /><span className="wind-text">{Math.round(forecastitem.WindSpeedMS)}</span></div></td>
               </tr>
             )}
           </tbody>

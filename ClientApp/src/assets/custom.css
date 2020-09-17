@@ -19,12 +19,29 @@ h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
   border-radius: 5px;
 }
 
-.forecastTable { width: 100%;  }
 .forecastTable td {
   padding: 1% 2% 1% 1%;
+  width: 15%;
 }
-.forecastTable .timeCol { padding-right: 10%; color: rgb(151,151,151); }
+.forecastTable .time-col { padding-right: 10%; color: rgb(151,151,151); width: 15%; }
+.forecastTable .temperature-col { font-weight: bold; font-size: 1.2em;}
+
 
 .recharts-text { color: rgb(151,151,151); }
 
 .temperatureNow { font-size: 4em;}
+
+.wind-container {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  text-align: center;
+  color: black;
+  vertical-align: center;
+}
+.wind-text { 
+  position: absolute;   
+  top: 45%;
+  left: 45%;
+  transform: translate(-45%, -45%);
+}
