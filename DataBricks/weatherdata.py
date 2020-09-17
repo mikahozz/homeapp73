@@ -3,11 +3,10 @@
 
 # COMMAND ----------
 
+# Fetch weather observation data for the specified time range for the hard coded location: Kumpula
 from fmiopendata.wfs import download_stored_query
 import datetime as dt
 
-#start_time = dt.datetime.utcnow() - dt.timedelta(days=7)
-#end_time = start_time + dt.timedelta(days=7)
 startTime = dt.datetime.strptime(dbutils.widgets.get("start_time"), "%Y-%m-%dT%H:%M:%S.%f+0000")
 endTime = dt.datetime.strptime(dbutils.widgets.get("end_time"), "%Y-%m-%dT%H:%M:%S.%f+0000")
 startTime = startTime.isoformat(timespec="seconds") + "Z"
@@ -21,6 +20,7 @@ obs = download_stored_query("fmi::observations::weather::multipointcoverage",
 
 # COMMAND ----------
 
+# Create dataframe from multi-dimension dict objects
 import pandas as pd
 from pyspark.sql.functions import *
 
