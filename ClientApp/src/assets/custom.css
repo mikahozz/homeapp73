@@ -6,7 +6,7 @@ body {
   color: white;
   font-family: Ubuntu;
 }
-h2 { font-size: 1.4em; margin-bottom: 0;}
+h2 { font-size: 120%; margin-bottom: 0;}
 h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
 
 .header {
@@ -14,8 +14,8 @@ h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
 }
 .box {
   background-color: rgb(39,41,62); 
-  padding: 5% 5% 5% 5%;
-  margin: 5% auto 5% auto;
+  padding: 20px 20px 20px 20px;
+  margin: 20px auto 20px auto;
   border-radius: 5px;
 }
 
@@ -29,7 +29,7 @@ h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
 
 .recharts-text { color: rgb(151,151,151); }
 
-.temperatureNow { font-size: 4em;}
+.temperatureNow { font-size: 400%; line-height: 1.5em;}
 
 .wind-container {
   width: 32px;
@@ -45,3 +45,5 @@ h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
   left: 45%;
   transform: translate(-45%, -45%);
 }
+
+.weatherTable td { padding-right: 10%; white-space: nowrap; }

@@ -21,10 +21,13 @@ export class WeatherNow extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : <p className="temperatureNow">{this.state.weatherdata[this.state.weatherdata.length-1].temperature}°</p>
+      : <div>
+          <p className="temperatureNow">{this.state.weatherdata[this.state.weatherdata.length-1].temperature }°</p>
+        </div>
 
     return (
       <div id="weatherNow" className="box">
+        <h2>Weather now</h2>
          {contents}
       </div>
     );

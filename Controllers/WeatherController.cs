@@ -1,10 +1,14 @@
 ﻿using System;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Storage.Blob;
-using Microsoft.Azure.Storage.Auth;
+using Azure.Storage.Blobs;
+using Azure.Storage;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Configuration;
+using Azure.Storage.Blobs.Models;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace homeapp73.Controllers
 {
@@ -23,25 +27,33 @@ namespace homeapp73.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            string storageAccountName = _configuration.GetValue<string>("AppSettings:StorageAccountName");
+            string containerName = _configuration.GetValue<string>("AppSettings:ContainerName");
+            string sasToken = _configuration.GetValue<string>("AppSettings:SasToken");
             //TODO: Error handling
-            string storageUri = string.Format("https://{0}.blob.core.windows.net", _configuration.GetValue<string>("AppSettings:StorageAccountName"));
+            string storageUri = string.Format("https://{0}.blob.core.windows.net/{1}", storageAccountName, containerName);
             // Prepare Azure blob
-            var credentials = new StorageCredentials(_configuration.GetValue<string>("AppSettings:SasToken"));
-            var blobClient = new CloudBlobClient(new Uri(storageUri), credentials);
-            var container = blobClient.GetContainerReference(_configuration.GetValue<string>("AppSettings:ContainerName"));
-            var blob = container.GetBlobReference(_configuration.GetValue<string>("AppSettings:BlobPath"));
+            //var credentials = new StorageSharedKeyCredential(storageAccountName, sasToken);
+            var containerClient = new BlobContainerClient(new Uri(storageUri + "?" + sasToken), null);
 
-            // Read json file and build a json array
+            // Read each json file and build a json array
             var jsonArray = new JArray();
-            using (var stream = blob.OpenRead())
+            var monthFolder = "month=" + DateTime.Now.ToString("yyyy-MM");
+            var col = containerClient.GetBlobsByHierarchy(prefix: "weatherdata.json/" + monthFolder + "/");
+            Console.WriteLine("blobs: " + col.Count<BlobHierarchyItem>());
+            foreach (BlobHierarchyItem blob in col.Where(item => item.IsBlob))
             {
-                using (StreamReader reader = new StreamReader(stream))
+               if(!blob.Blob.Name.EndsWith(".json"))
+                    continue;   // Skip non-json files
+
+                Console.WriteLine("blob.Blob.Name: " + blob.Blob.Name);
+                var blobClient = containerClient.GetBlobClient(blob.Blob.Name);
+                using (BlobDownloadInfo download = blobClient.Download())
+                using (StreamReader reader = new StreamReader(download.Content))
+                while (!reader.EndOfStream)
                 {
-                    while (!reader.EndOfStream)
-                    {
-                        JObject o = JObject.Parse(reader.ReadLine());
-                        jsonArray.Add(o);
-                    }
+                    JObject o = JObject.Parse(reader.ReadLine());
+                    jsonArray.Add(o);
                 }
             }
             return Content(jsonArray.ToString(), "application/json");
