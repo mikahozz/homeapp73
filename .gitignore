@@ -3,6 +3,7 @@
 
 # dev files
 appsettings.Development.json
+appsettings.Test.json
 
 # User-specific files
 *.suo

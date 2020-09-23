@@ -20,7 +20,7 @@ namespace homeapp73.Controllers
         {
             // TODO: Error handling
             string response = string.Empty;
-            string weatherUri = "https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi%3A%3Aobservations%3A%3Aweather%3A%3Amultipointcoverage&crs=EPSG%3A%3A3067&fmisid=101009&parameters=temperature,humidity";
+            string weatherUri = "https://opendata.fmi.fi/wfs?request=getFeature&storedquery_id=fmi%3A%3Aobservations%3A%3Aweather%3A%3Amultipointcoverage&crs=EPSG%3A%3A3067&fmisid=101009&parameters=temperature,N_MAN";
             var startTime = DateTime.Now.AddHours(-1).ToUniversalTime().ToString("s") + "Z";
             weatherUri += string.Format("&starttime={0}", startTime);
             using (var client = new HttpClient())

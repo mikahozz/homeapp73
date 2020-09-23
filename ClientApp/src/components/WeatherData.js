@@ -6,6 +6,7 @@ import _ from 'lodash'
 
 export class WeatherData extends Component {
   static displayName = WeatherData.name;
+  static intervalId;
 
   constructor(props) {
     super(props);
@@ -14,6 +15,12 @@ export class WeatherData extends Component {
 
   componentDidMount() {
     this.populateWeatherData();
+    // Refresh once in 24h
+    this.intervalId = setInterval(this.populateWeatherData.bind(this), 24*60*60*1000);
+  } 
+  componentWillUnmount() {
+    // Stop refreshing
+    clearInterval(this.intervalId);
   }
 
   async populateWeatherData() {
@@ -69,7 +76,7 @@ export class WeatherData extends Component {
 
     return (
       <div id="weatherdata" className="box">
-        <h2>Weather stats</h2>
+        <h2>Weather stats, average daily temperature this month</h2>
          {contents}
       </div>
     );

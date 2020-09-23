@@ -3,6 +3,7 @@ import moment from 'moment';
 
 export class Forecast extends Component {
   static displayName = Forecast.name;
+  static intervalId;
 
   constructor(props) {
     super(props);
@@ -11,7 +12,15 @@ export class Forecast extends Component {
 
   componentDidMount() {
     this.populateForecastData();
+    // Refresh data every 1 hour
+    this.intervalId = setInterval(this.populateForecastData.bind(this), 60*60*1000);
   }
+
+  componentWillUnmount() {
+    // Stop refreshing
+    clearInterval(this.intervalId);
+  }
+
 static renderRotate(degree) {
   return ({transform: 'rotate(' + degree + 'deg)'});
 }
