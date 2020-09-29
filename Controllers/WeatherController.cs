@@ -46,13 +46,11 @@ namespace homeapp73.Controllers
             {
                 string storageAccountName = _configuration.GetValue<string>("AppSettings:StorageAccountName");
                 string containerName = _configuration.GetValue<string>("AppSettings:ContainerName");
-                //string sasToken = _configuration.GetValue<string>("AppSettings:SasToken");
                 var vaultClient = new SecretClient(new Uri(_configuration.GetValue<string>("AppSettings:KeyVaultUri")), new DefaultAzureCredential(), null);
                 string sasToken = vaultClient.GetSecret("HomeApp-Storage-SasToken").Value.Value;
                 //TODO: Error handling
                 string storageUri = string.Format("https://{0}.blob.core.windows.net/{1}", storageAccountName, containerName);
                 // Prepare Azure blob
-                //var credentials = new StorageSharedKeyCredential(storageAccountName, sasToken);
                 var containerClient = new BlobContainerClient(new Uri(storageUri + "?" + sasToken), null);
 
                 // Read each json file and build a json array

@@ -7,7 +7,7 @@ body {
   color: white;
   font-family: Ubuntu;
 }
-h2 { font-size: 120%; margin-bottom: 0;}
+h2 { font-size: 120%; margin-bottom: 10px;}
 h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
 
 .header {
@@ -48,4 +48,6 @@ h3 { color: rgb(151,151,151); font-size: 0.9em; margin-top: 0; }
   transform: translate(-45%, -45%);
 }
 
-.weatherTable td { padding-right: 10%; white-space: nowrap; }
+.weatherTable { border-spacing: 5px 0;  border-collapse: separate;}
+.weatherTable td { white-space: nowrap; text-align: right;}
+.weatherTable th { white-space: nowrap;}

@@ -25,7 +25,6 @@ static renderRotate(degree) {
   return ({transform: 'rotate(' + degree + 'deg)'});
 }
   static renderWeatherContents(forecastdata) {
-    let style = {transform: 'rotate(180deg)'};
     return (
       <div>
         <table className="forecastTable">
@@ -33,9 +32,9 @@ static renderRotate(degree) {
             {forecastdata.map(forecastitem =>
               <tr key={forecastitem.Datetime}>
                 <td className="time-col">{moment(forecastitem.Datetime).format('HH:mm')}</td>
-                <td><img width="32" height="32" src={"/img/" + forecastitem.WeatherSymbol3 + ".svg"} /></td>
+                <td><img alt="" width="32" height="32" src={"/img/" + forecastitem.WeatherSymbol3 + ".svg"} /></td>
                 <td className="temperature-col">{Math.round(forecastitem.Temperature)}°</td>
-                <td><div className="wind-container"><img style={Forecast.renderRotate(forecastitem.WindDirection-180)} src="/img/arrow.svg" width="32px" height="32px" /><span className="wind-text">{Math.round(forecastitem.WindSpeedMS)}</span></div></td>
+                <td><div className="wind-container"><img alt="" style={Forecast.renderRotate(forecastitem.WindDirection-180)} src="/img/arrow.svg" width="32px" height="32px" /><span className="wind-text">{Math.round(forecastitem.WindSpeedMS)}</span></div></td>
               </tr>
             )}
           </tbody>
