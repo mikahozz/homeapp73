@@ -16,4 +16,4 @@ while startTime < dt.datetime.utcnow():
 
 # Fetch weather data by exact dates
 params = {"start_time":"2020-09-14T00:00:00.000+0000","end_time":"2020-09-17T16:32:39.520+0000"}
-dbutils.notebook.run("/Users/mika.ahopelto@outlook.com/Homeapp73/weatherdata", 600, params)
+dbutils.notebook.run("/Users/<userid>/Homeapp73/weatherdata", 600, params)
