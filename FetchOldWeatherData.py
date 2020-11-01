@@ -9,7 +9,7 @@ while startTime < dt.datetime.utcnow():
   if(endTime > dt.datetime.utcnow()):
     endTime = dt.datetime.utcnow()
   print("{} {}".format(startTime, endTime))
-  dbutils.notebook.run("/Users/mika.ahopelto@outlook.com/Homeapp73/weatherdata", 600, {"start_time": startTime, "end_time": endTime })
+  dbutils.notebook.run("/Users/<userid>/Homeapp73/weatherdata", 600, {"start_time": startTime, "end_time": endTime })
   startTime = endTime + dt.timedelta(minutes=10)
 
 # COMMAND ----------
